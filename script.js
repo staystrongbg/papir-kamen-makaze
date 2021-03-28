@@ -1,45 +1,43 @@
-const game = () => {
-  const choice = ['scissors', 'rock', 'paper']
-  //ai
-  const computerSelection = () => {
-    let aiChoice
-    const randomNum = Math.floor(Math.random() * 3)
-    randomNum === 0
-      ? (aiChoice = choice[0])
-      : randomNum === 1
-      ? (aiChoice = choice[1])
-      : (aiChoice = choice[2])
-    return aiChoice
-  }
-  let comp = computerSelection()
-  console.log(comp)
+const choice = ['scissors', 'rock', 'paper'];
+let aiScore = (playerScore = 0);
+//ai
+const computerSelection = () => {
+  let aiChoice = Math.floor(Math.random() * 3);
+  aiChoice == 0
+    ? (aiChoice = choice[0])
+    : aiChoice == 1
+    ? (aiChoice = choice[1])
+    : (aiChoice = choice[2]);
+  console.log(aiChoice);
+  return aiChoice;
+};
 
-  //player
-  const playerSelection = () => {
-    let playersChoice = prompt('chose your weapon?')
-    playersChoice = playersChoice.toLowerCase()
-    console.log(playersChoice)
-    return playersChoice
-  }
-  let player = playerSelection()
+//player
+const playerSelection = () => {
+  let playersChoice = prompt('chose your weapon?');
+  playersChoice = playersChoice.toLowerCase();
+  console.log(playersChoice);
+  return playersChoice;
+};
 
-  const playRound = () => {
-    if (
-      (comp === choice[0] && player === choice[1]) ||
-      (comp === choice[2] && player === choice[0]) ||
-      (comp === choice[1] && player == choice[2])
-    ) {
-      console.log('player won!')
-    } else if (
-      (comp === choice[0] && player === choice[0]) ||
-      (comp === choice[2] && player === choice[2]) ||
-      (comp === choice[1] && player === choice[1])
-    ) {
-      console.log('Tied!')
-    } else console.log('AI won!')
+//round
+const playRound = (computerSelection, playerSelection) => {
+  if (
+    (computerSelection == choice[0] && playerSelection == choice[1]) ||
+    (computerSelection == choice[2] && playerSelection == choice[0]) ||
+    (computerSelection == choice[1] && playerSelection == choice[2])
+  ) {
+    console.log('player won!');
+    playerScore++;
+  } else if (computerSelection === playerSelection) {
+    console.log('Tied!');
+  } else {
+    console.log('AI won!');
+    aiScore++;
   }
-  console.log(playRound())
-}
-for (i = 0; i <= 5; i++) {
-  game()
+};
+for (i = 0; i <= 4; i++) {
+  console.log(playRound(computerSelection(), playerSelection()));
+  console.log(` player score is: ${playerScore}`);
+  console.log(` ai score is: ${aiScore}`);
 }
