@@ -1,12 +1,13 @@
+const choice = ['scissors', 'rock', 'paper']
 //ai
 const computerSelection = () => {
   let aiChoice
   const randomNum = Math.floor(Math.random() * 3)
   randomNum === 0
-    ? (aiChoice = 'scissors')
+    ? (aiChoice = choice[0])
     : randomNum === 1
-    ? (aiChoice = 'rock')
-    : (aiChoice = 'paper')
+    ? (aiChoice = choice[1])
+    : (aiChoice = choice[2])
   return aiChoice
 }
 let comp = computerSelection()
@@ -15,6 +16,7 @@ console.log(comp)
 //player
 const playerSelection = () => {
   let playersChoice = prompt('chose your weapon?')
+  playersChoice = playersChoice.toLowerCase()
   console.log(playersChoice)
   return playersChoice
 }
@@ -22,17 +24,17 @@ let player = playerSelection()
 
 const playRound = () => {
   if (
-    (comp === 'scissors' && player === 'rock') ||
-    (comp === 'paper' && player === 'scissors') ||
-    (comp === 'rock' && player == 'paper')
+    (comp === choice[0] && player === choice[1]) ||
+    (comp === choice[2] && player === choice[0]) ||
+    (comp === choice[1] && player == choice[2])
   ) {
     console.log('player won!')
   } else if (
-    (comp === 'scissors' && player === 'scissors') ||
-    (comp === 'paper' && player === 'paper') ||
-    (comp === 'rock' && player === 'rock')
+    (comp === choice[0] && player === choice[0]) ||
+    (comp === choice[2] && player === choice[2]) ||
+    (comp === choice[1] && player === choice[1])
   ) {
     console.log('Tied!')
-  } else console.log('comp won!')
+  } else console.log('AI won!')
 }
 console.log(playRound())
